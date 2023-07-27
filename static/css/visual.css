@@ -1,0 +1,103 @@
+.canvas_preview_img{
+    width: 75%;
+    height: 75%;
+}
+
+.grid-container{
+    display: grid;
+    margin-right: 20px;
+    grid-template-columns: 3fr 3fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    column-gap: 20px;
+}
+
+.item-mode-dataset{
+    color: black;
+    background-color: #3794e0;
+    padding: 0px 20px;
+}
+
+.item-mode-dataset{
+    grid-row-start: 1;
+    grid-column-start: 1;
+}
+
+.item-mode {
+    color: black;
+    background-color: #3794e0;
+    padding: 0px 20px;
+}
+
+.item-mode {
+    grid-row-start: 1;
+    grid-column-start: 2;
+}
+
+.item-mode-select-dataset{
+    grid-row-start: 2;
+    grid-column-start: 1;
+}
+
+.item-mode-select-dataset select {
+    width: 100%;
+    background-color: #afd5f0;
+    padding-top: 6px;
+    border: none;
+}
+
+.item-mode-select {
+    grid-row-start: 2;
+    grid-column-start: 2;
+}
+
+.item-mode-select select {
+    width: 100%;
+    background-color: #afd5f0;
+    padding-top: 6px;
+    border: none;
+}
+
+.item-imnum {
+    color: black;
+    background-color: #3794e0;
+    padding: 0px 20px;
+}
+
+.item-imnum {
+    grid-row-start: 1;
+    grid-column-start: 3;
+}
+
+.item-imnum-input {
+    overflow: hidden;
+    grid-row-start: 2;
+    grid-column-start: 3;
+}
+
+.item-imnum-input input {
+    width: 100%;
+    background-color: #afd5f0;
+    border-style: solid;
+    border-width: 1px;
+    border: none;
+}
+
+.item-submit-btn {
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.btn-load{
+    background-color: #DC3545;
+    border: none;
+    color: white;
+    padding: 12px 32px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }

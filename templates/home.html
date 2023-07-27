@@ -1,0 +1,427 @@
+<html>
+<header>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>AIO-IR system</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</header>
+<body onload="on_load();">
+    <style>
+        *{
+            margin: 0;
+        }
+        body{
+          margin: 0;
+        }
+        
+        .custom-btn {
+          color: #fff;
+          border-radius: 5px;
+          /* padding: 10px 25px; */
+          font-family: 'Lato', sans-serif;
+          background: transparent;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          position: relative;
+          display: inline-block;
+          box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+          7px 7px 20px 0px rgba(0,0,0,.1),
+          4px 4px 5px 0px rgba(0,0,0,.1);
+          outline: none;
+        }
+
+        .btn-13 {
+          background-color: #89d8d3;
+          background-image: linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
+          border: none;
+          z-index: 1;
+        }
+        .btn-13:after {
+          position: absolute;
+          content: "";
+          width: 100%;
+          height: 0;
+          bottom: 0;
+          left: 0;
+          z-index: -1;
+          border-radius: 5px;
+          background-color: #4dccc6;
+        background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
+          box-shadow:
+          -7px -7px 20px 0px #fff9,
+          -4px -4px 5px 0px #fff9,
+          7px 7px 20px 0px #0002,
+          4px 4px 5px 0px #0001;
+          transition: all 0.3s ease;
+        }
+        .btn-13:hover {
+          color: #fff;
+        }
+        .btn-13:hover:after {
+          top: 0;
+          height: 100%;
+        }
+        .btn-13:active {
+          top: 2px;
+        }
+
+        .container{
+          width: 100%;
+          height: 100%;
+          background-color: #e0e5ec;;
+        }
+        /* search */
+        .search_container{
+          width: 100%;
+          height: 100px;
+          display: grid;
+          grid-template-columns: auto 439px;
+          border-bottom: 5px solid #4dccc6;
+        }
+        .search{
+          width: 100%;
+          height: 100%;
+          padding: 20px;
+         
+        }
+        .search label{
+          position: absolute;
+          font-size: 30px;
+          padding: 10px
+        }
+        .search input{
+          width: 96%;
+          height: 50px;
+          border: none;
+          border-radius: 10px;
+          padding-left: 5%;
+          font-size: 20px;
+        }
+        .group_btn{
+          width: 100%;
+          height: 100%;
+          padding-top: 20px;
+        }
+        .group_btn button{
+          width: 130px;
+          height: 50px;
+          border-radius: 10px;
+          margin-right: 3%;
+          color: white;
+          font-size: 20px;
+        }
+        /* search */
+    
+       .img_path{
+        height: 100%;
+        background-color: #bdc0c5;
+        padding-left: 20px;
+       }
+       .img_path label{
+        font-size: 18px;
+      }
+      .img_path input{
+        height: 40px;
+        width: 429px;
+        border-radius: 10px;
+        border: none;
+        margin: 5px 10px 0 10px;
+        padding-left: 2%;
+        font-size: 13px;
+      }
+      .img_path button{
+        width: 80px;
+        height: 40px;
+        color: white;
+        border-radius: 10px;
+        font-size: 15px;
+      }
+
+      .csv{
+        width: 98%;
+        height: 100%;
+        padding-left: 69px;
+        background-color: bdc0c5;
+       }
+       .csv label{
+        font-size: 18px;
+       }
+       .csv select{
+        width: 80px;
+        height: 40px;
+        border-radius: 10px;
+        border: none;
+        margin: 5px 3px 0 10px;
+        padding-left: 5px;
+        font-size: 13px;
+       }
+
+       .num_querry{
+        background-color: bdc0c5;
+        padding-left: 49px;
+       }
+       .num_querry label{
+        font-size: 18px;
+       }
+       .num_querry input{
+        width: 45px;
+        height: 40px;
+        border-radius: 10px;
+        border: none;
+        margin:5px 5px 0 5px;
+        padding-left: 4%;
+        font-size: 13px;
+       }
+       .num_querry button{
+        width: 80px;
+        height: 40px;
+        color: white;
+        border-radius: 10px;
+        font-size: 15px;
+       }
+       
+      
+        /* selection */
+    
+        /* list img */
+        .image{
+          width: 100%;
+          height: 100%;
+        }
+        /* list img */
+    
+        /* add image button */
+        #div_img {
+                display: flex;
+                flex-direction: row;    
+                flex-wrap: wrap;
+                padding: 20px;
+                background-color: #e0e5ec;
+                /* height: 120px;
+                width: 516px; */
+            }
+    
+            .container_img_btn {
+                position: relative;
+                width: 100%;
+                max-width: 318px;
+                display: grid;
+                grid-template-columns: auto auto auto auto;
+                padding: 1%;
+                cursor: pointer;
+            }
+            
+            .container_img_btn img {
+                width: 100%;
+                height: 100%;
+            }
+    
+            .container_img_btn .btn_knn {
+                display: none;
+                position: absolute;
+                top: 50%;
+                left: 10%;
+                background-color: #4dccc6;
+                color: white;
+                font-size: 16px;
+                padding: 5px 12px;
+                cursor: pointer;
+                border-radius: 5px;
+                text-align: center;
+            }
+            .container_img_btn .btn_select {
+                display: none;
+                position: absolute;
+                top: 50%;
+                right: 10%;
+                background-color: #4dccc6;
+                color: white;
+                font-size: 16px;
+                padding: 5px 12px;
+                cursor: pointer;
+                border-radius: 5px;
+                text-align: center;
+            }
+            
+            .container_img_btn .btn_knn:hover{
+              background-color: #145552;
+            }
+
+            .container_img_btn .btn_select:hover{
+              background-color: #145552;
+            }
+    
+            .container_img_btn img:hover{
+                border: 4px solid #4dccc6;
+            }
+            /* .container_img_btn img:focus{hoverImg
+                border: 1px solid blue;
+            } */
+            /* poup */
+            #popup_canvas{
+                width: 100%;
+                height: 100%;
+            }
+    
+            #popup_fname_div{
+                position: fixed;
+                margin-left: 25%;
+                margin-top: 60%;
+                color: rgb(0,255,0);
+                font-size: 30;
+            }
+
+            @supports (display: flex) {
+            @media screen and (min-width: 1024px) {
+              article {
+                display: flex;
+              }
+            }
+          }
+
+          @supports (display: grid) {
+            @media screen and (min-width: 1024px) {
+              article {
+                display: grid;
+              }
+            }
+          }
+    
+      </style>
+    <div class="container">
+        <div class="search_container">
+          <div class="search">
+           
+            <label for="">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </label>
+            <input id="text_query" type="text" placeholder="Text query">
+          </div>
+          <div class="group_btn">
+            <button class="custom-btn btn-13" onclick="search();"><span>Search</span></button>
+          </div>
+  
+        </div>
+
+
+        <!-- <div style="height: 5px; width: 100%; background-color: black; margin-bottom: 5px; margin-top: 5px;"></div> -->
+        <div id="div_img">
+            
+        </div>
+  
+        <div style="height: 5px; width: 100%; background-color: black;"></div>
+        <div id="div_page">
+            
+        </div>
+        <div id="div_total_page">Total: 1200 page</div>
+        <div style="margin-bottom: 50px;"></div>
+  
+      </div>
+    <script>
+        var data = '{{ data|tojson }}';
+        data = data.replace(/\s/g, '');
+        data = data.replace(/\\/g, '/');
+        data = JSON.parse(data);
+        let btn_knn = document.getElementsByClassName("btn_knn");
+        let btn_select = document.getElementsByClassName("btn_select");
+        let hoverImg = document.getElementsByClassName("hoverImg");
+        // console.log("data: " + JSON.stringify(data))
+        function add_paging(){
+            console.log(data['num_page']);
+            var url = new URL(window.location.href);
+            var cur_index = parseInt(url.searchParams.get("index"));
+            var imgpath = url.searchParams.get("imgpath");
+            // var labelpath = url.searchParams.get("labelpath");
+            if (cur_index == 'undefined'){
+                cur_index = 0;
+            }
+            var i = cur_index-4;
+            if (i > 0){
+                var iDiv = document.createElement('div');
+                iDiv.className = 'page_num';
+                iDiv.innerHTML = "...";
+                document.getElementById("div_page").appendChild(iDiv);
+            }
+            for (i; ((i < data['num_page']) && (i < cur_index+4)); i++){
+                if (i < 0){
+                    i = 0;
+                }
+                var iDiv = document.createElement('div');
+                iDiv.className = 'page_num';
+                var iA = document.createElement('a');
+                // iA.href = "?index="+i.toString()+"&imgpath="+imgpath+"&labelpath="+labelpath;
+                iA.href = "?index="+i.toString()+"&imgpath="+imgpath;
+                iA.innerHTML = i.toString();
+                if (i == cur_index){
+                    iA.style.color="green";
+                }
+                iDiv.appendChild(iA);
+                document.getElementById("div_page").appendChild(iDiv);
+            }
+            if (i < data['num_page']){
+                var iDiv = document.createElement('div');
+                iDiv.className = 'page_num';
+                iDiv.innerHTML = "...";
+                document.getElementById("div_page").appendChild(iDiv);
+            }
+            document.getElementById("div_total_page").innerHTML = "Total: "+data['num_page'].toString()+" page";
+        }
+        
+        function add_img(div_id_image){
+            let div_img = document.getElementById("div_img");
+            let pagefile_list = data['pagefile'];
+            
+            pagefile_list.forEach((item,index) => {
+                // console.log('item: ' + JSON.stringify(item))
+                $("#div_img").append(
+                    `<div class= "container_img_btn"  onmouseover="mouseOver(${index})" onmouseout="mouseOut(${index})">
+                        <button class="btn_knn" onClick="go_img_search(${item.id})">IR</button>
+                        <img class="hoverImg" onclick="show_list_segment(${item.id})" src="get_img?fpath=${item.imgpath}">
+                    </div>`
+                )
+            });
+        
+        }
+        
+        function mouseOver(id){
+            // console.log('type: ' + typeof(btn_knn))
+            btn_knn[id].style.display="block";
+            btn_select[id].style.display="block";
+        }
+        function mouseOut(id){
+            // console.log('type: ' + typeof(btn_knn))
+            btn_knn[id].style.display="none";
+            btn_select[id].style.display="none";
+        }
+        function go_img_search(id){
+            window.open("/imgsearch?imgid="+id);
+        }
+
+        function on_load(){
+            var url = new URL(window.location.href);
+            var imgpath = url.searchParams.get("imgpath");
+            if("query" in data){
+              document.getElementById("text_query").value = data["query"]
+            }
+            add_paging();
+            add_img("div_img");
+        }
+
+        function show_list_segment(id){
+            window.open("/showsegment?imgid="+id);
+        }
+
+        function search(){
+            text_query = document.getElementById('text_query').value;
+
+            window.location.href = "/textsearch?textquery="+text_query;
+            
+            document.getElementById('text_query').innerHTML = text_query;
+        }
+
+
+    </script>
+</body>
+</html> 
